@@ -11,6 +11,7 @@ export default function Home() {
   const [nuclear, setNuclear] = useState("");
   const [coal, setCoal] = useState("");
   const [rainforest, setRainforest] = useState("");
+  const [count, setCount] = useState(0);
 
   const handleAnimalCheckbox = () => {
     if(!animals) {
@@ -94,27 +95,28 @@ export default function Home() {
           <div>
             <div>
               <input type="search" name="search" id="search" placeholder="Search" value={q} onChange={(e) => setQ(e.target.value)} className="border shadow-inner py-2 px-4 rounded-xl w-full" />
-              <button className="px-2 py-1 border-b mt-4 shadow-md hover:shadow-none mb-6 w-full" onClick={() => setQ(() => "")}>Clear Search</button>
+              <button className="px-2 py-1 border-b mt-1 shadow-md hover:shadow-none mb-6 w-full bg-stone-100 rounded-xl font-semibold" onClick={() => setQ(() => "")}>Clear Search</button>
             </div>
             <div className="space-x-1">
-              <input type="checkbox" id="animalBox" checked={animals} value={animals} onClick={handleAnimalCheckbox} />
-              <label id="animalBox">Animal Testing</label>
+              <input type="checkbox" className="cursor-pointer" id="animalBox" checked={animals} value={animals} onClick={handleAnimalCheckbox} />
+              <label id="animalBox">Involved in Animal Testing</label>
             </div>
             <div className="space-x-1">
-              <input type="checkbox" id="nuclearBox" checked={nuclear} value={nuclear} onClick={handleNuclearCheckbox} />
-              <label id="nuclearBox">Nuclear Weapons</label>
+              <input type="checkbox" className="cursor-pointer" id="nuclearBox" checked={nuclear} value={nuclear} onClick={handleNuclearCheckbox} />
+              <label id="nuclearBox">Involved in Nuclear Weapons</label>
             </div>
             <div className="space-x-1">
-              <input type="checkbox" id="coalBox" checked={coal} value={coal} onClick={handleCoalCheckbox} />
-              <label id="coalBox">Coal Power</label>
+              <input type="checkbox" className="cursor-pointer" id="coalBox" checked={coal} value={coal} onClick={handleCoalCheckbox} />
+              <label id="coalBox">Involved in Coal Power</label>
             </div>
             <div className="space-x-1">
-              <input type="checkbox" id="rainforestBox" checked={rainforest} value={rainforest} onClick={handleRainforestCheckbox} />
-              <label id="rainforestBox">Rainforest Destruction</label>
+              <input type="checkbox" className="cursor-pointer" id="rainforestBox" checked={rainforest} value={rainforest} onClick={handleRainforestCheckbox} />
+              <label id="rainforestBox">Involved in Rainforest Destruction</label>
             </div>
+
             <div className="flex flex-col">
-              <button className="px-2 py-1 border-b mt-4 shadow-md hover:shadow-none" onClick={noActivities}>Show only companies with no destructive activities</button>
-              <button className="px-2 py-1 border-b mt-4 shadow-md hover:shadow-none" onClick={clearFilters}>Clear Filters</button>
+              <button className="px-2 py-1 border-b mt-4 shadow-md hover:shadow-none bg-stone-100 rounded-xl font-semibold" onClick={noActivities}>Show only companies with no destructive activities</button>
+              <button className="px-2 py-1 border-b mt-4 shadow-md hover:shadow-none bg-stone-100 rounded-xl font-semibold" onClick={clearFilters}>Clear Filters</button>
             </div>
           </div>
         </fieldset>
@@ -133,8 +135,9 @@ export default function Home() {
               <div className="text-xl pb-3">
                 {company['Ticker Symbol']}
               </div>
+
               <div>
-                <p className="font-semibold">Item Count: </p>
+                <p className="font-semibold">Item Count: {Object.values(company).filter(value => value === true).length}</p>
               </div>
               <div>
                 {company['Animal Testing'] &&
